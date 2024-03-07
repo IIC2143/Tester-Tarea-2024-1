@@ -11,7 +11,7 @@ TEAM_A = [
     Team('Unión Española', 'Santa Laura', 19887, 'Independencia'),
     Team('Audax Italiano', 'Bicentenario de La Florida', 12000, 'La Florida'),
     Team('Santiago Morning', 'Municipal de La Pintana', 5000, 'La pintana'),
-    Team('San Luis de Quillota', 'Municipal Lucio Fariña Fernández', 7860, 'Quillota'),
+    Team('San Luis de Quillota', 'Municipal Lucio Fariña Fernández', 7860, 'Quillota')
 ]
 
 TEAM_B = [
@@ -24,7 +24,7 @@ TEAM_B = [
     Team('San Luis de Quillota', 'Municipal Lucio Fariña Fernández', 7860, 'Quillota'),
     Team('Deportes La Serena', 'La Portada', 18243, 'La Serena'),
     Team('Deportes Temuco', 'Germán Becker', 18413, 'Temuco'),
-    Team('Deportes Puerto Montt', 'Chinquihue', 8000, 'Puerto Montt'),
+    Team('Deportes Puerto Montt', 'Chinquihue', 8000, 'Puerto Montt')
 ]
 
 TEAM_C = [
@@ -37,7 +37,7 @@ TEAM_C = [
     Team('Colo Colo', 'Monumental', 43667, 'Macul'),
     Team('Universidad de Chile', 'No tienen :(', 0, 'Ñuñoa'),
     Team('Deportes Magallanes', 'Municipal Luis Navarro Avilés', 3500, 'Santiago'),
-    Team('Unión Española', 'Santa Laura', 19887, 'Independencia'),
+    Team('Unión Española', 'Santa Laura', 19887, 'Independencia')
 ]
 
 
@@ -51,7 +51,7 @@ WRONG_TEAMS= [
     Team('Everton', 'Sausalito', 22000, ''),
     Team('', '', 18000, 'Valparaíso'),
     Team('', '', 10000, 'Iquique'),
-    Team('', '', 21000, 'Antofagasta'),
+    Team('', '', 21000, 'Antofagasta')
 ]
 
 WRONG_TEAMS_2 = [
@@ -64,7 +64,7 @@ WRONG_TEAMS_2 = [
     Team('Everton', 'Sausalito', 22000, ''),
     Team('', '', 18000, 'Valparaíso'),
     Team('', '', 10000, 'Iquique'),
-    Team('', '', 21000, 'Antofagasta'),
+    Team('', '', 21000, 'Antofagasta')
 ]
 
 MATCHES_A = [
@@ -77,7 +77,7 @@ MATCHES_A = [
     Match('Not played', '--'),
     Match('Not played', '--'),
     Match('Not played', '--'),
-    Match('Not played', '--'),
+    Match('Not played', '--')
 ]
 
 MATCHES_B = [
@@ -90,7 +90,7 @@ MATCHES_B = [
     Match('Not played', '--'),
     Match('Not played', '--'),
     Match('Not played', '--'),
-    Match('Not played', '--'),
+    Match('Not played', '--')
 ]
 
 MATCHES_C  = [
@@ -103,7 +103,7 @@ MATCHES_C  = [
     Match('Not played', '--'),
     Match('Not played', '--'),
     Match('Not played', '--'),
-    Match('Not played', '--'),
+    Match('Not played', '--')
 ]
 
 WRONG_MATCHES = [
@@ -120,10 +120,36 @@ WRONG_MATCHES_2 = [
 ]
 
 PLAYERS_A = [
-    Player('Javier Perez', 28, 4,5),
-    Player('Carlos Perez', 30, 3, 5),
-    Player('Juan Perez', 25, 4, 5),
-    Player('Pedro Perez', 27, 4, 5)
+    Player('Cristian Ruz', 10, 4,0),
+    Player('Arturo Vidal', 0, 3, 5),
+    Player('Felipe Loyola', 4, 1, 5),
+    Player('Sebatian Saez', 2, 1, 0),
+    Player('Ignacio Jeraldino',4,0,3),
+    Player('Felipe Flores', 3, 2, 1)
+    ]
+
+PLAYERS_B = [
+    Player('Joe Abrigo', 2, 2, 0),
+    Player('Bryan Rabello', 0, 3, 5),
+    Player('Felipe Fritz', 4, 1, 5),
+    Player('Cristian Palacios', 2, 1, 0),
+    Player('Felipe Flores',4,0,3),
+    Player('Emiliano Vecchio', 3, 2, 1),
+    Player('Patricio Rubio', 1, 0, 0)
+]
+
+PLAYERS_C = [
+    Player('Gustavo Lanaro', 1, 0, 0),
+    Player('Diego Valencia', 0, 0, 0),
+    Player('Pablo Parra', 0, 0, 0),
+    Player('Matias Rodriguez', 0, 2, 0),
+    Player('Edson Puch', 2, 0, 2),
+    Player('Felipe Fritz', 0, 0, 0),
+    Player('Diego Sanchez', 0, 0, 0)
+]
+
+PLAYERS_WRONG = [
+    Player('', 1, 0, 0)
     ]
 
 

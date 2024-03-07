@@ -7,18 +7,18 @@ BASE_URL = 'http://localhost:3000'
 
 
 @__skip_exception
-def get_director_movies(director, *, show=False):
-    url = f'{BASE_URL}/director/{director.id}/movies'
+def get_team_matches(team, *, show=False):
+    url = f'{BASE_URL}/team/{team.id}/matches'
     response = get(url)
     body = response.json()
 
     if show:
-        __show(body, director.movies)
+        __show(body, team.matches)
 
-    if len(body) == len(director.movies):
+    if len(body) == len(team.matches):
         content_match = all(
-            movie.is_valid(body[i])
-            for i, movie in enumerate(director.movies)
+            match.is_valid(body[i])
+            for i, match in enumerate(team.matches)
         )
 
         return content_match
@@ -27,23 +27,26 @@ def get_director_movies(director, *, show=False):
 
 
 @__skip_exception
-def post_movie(director, movie, *, show=False):
-    url = f'{BASE_URL}/director/{director.id}/movies'
-    data = movie.data()
+def post_match(teamA, teamB, match, *, show=False):
+    url = f'{BASE_URL}/matches/{match.id}'
+    data = match.data()
     response = post(url, json=data)
     body = response.json()
 
     if show:
-        __show(body, movie)
+        __show(body, match)
 
     if response.status_code >= 400:
         return False
 
-    if movie.is_valid(body, is_new=True):
-        director.movies.append(movie)
-        movie.id = body['id']
-        movie.director = director
-        movie.director_id = director.id
+    if match.is_valid(body, is_new=True):
+        teamA.matches.append(match)
+        teamB.matches.append(match)
+        match.id = body['id']
+        match.teamA = body['teamA']
+        match.teamB = body['teamB']
+        match.state = body['state']
+        match.result = body['result']
 
         return True
 
@@ -51,23 +54,23 @@ def post_movie(director, movie, *, show=False):
 
 
 @__skip_exception
-def patch_movie(movie, new_movie_data, *, show=False):
-    url = f'{BASE_URL}/director/{movie.director.id}/movies/{movie.id}'
-    data = new_movie_data
+def patch_match(match, new_match_data, *, show=False):
+    url = f'{BASE_URL}/matches/{match.id}'
+    data = new_match_data.data()
     response = patch(url, json=data)
     body = response.json()
 
     if response.status_code >= 400:
         return False
 
-    movie_copy = deepcopy(movie)
-    movie_copy.update(new_movie_data)
+    match_copy = deepcopy(match)
+    match_copy.update(new_match_data)
 
     if show:
-        __show(body, movie_copy)
+        __show(body, match_copy)
 
-    if movie_copy.is_valid(body):
-        movie.update(new_movie_data)
+    if match_copy.is_valid(body):
+        match.update(new_match_data)
 
         return True
 
@@ -75,24 +78,24 @@ def patch_movie(movie, new_movie_data, *, show=False):
 
 
 @__skip_exception
-def get_movies_by_keyword(movies, keyword, *, show=False):
-    url = f'{BASE_URL}/movies/sinopsis/{keyword}'
+def get_match_by_team(matches, team, *, show=False):
+    url = f'{BASE_URL}/matches/{team}'
     response = get(url)
     body = response.json()
 
-    filtered_movies = [
-        movie
-        for movie in movies
-        if keyword in movie.sinopsis
+    filtered_matches = [
+        match
+        for match in matches
+        if team in match.teamA or team in match.teamB
     ]
 
     if show:
-        __show(body, filtered_movies)
+        __show(body, filtered_matches)
 
-    if len(body) == len(filtered_movies):
+    if len(body) == len(filtered_matches):
         content_match = all(
-            movie.is_valid(body[i])
-            for i, movie in enumerate(filtered_movies)
+            match.is_valid(body[i])
+            for i, match in enumerate(filtered_matches)
         )
 
         return content_match

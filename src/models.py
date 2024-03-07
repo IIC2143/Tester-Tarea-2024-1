@@ -51,10 +51,10 @@ class Team:
 
 class Match:
 
-    def __init__(self, state, result):
+    def __init__(self, teamA, teamB,state, result):
         self.id = None
-        self.teamA = None
-        self.teamB = None
+        self.teamA = teamA
+        self.teamB = teamB
         self.state = state
         self.result = result
 
@@ -69,8 +69,8 @@ class Match:
 
     def is_valid(self, data, is_new=False):
         attr_1 = data['id'] == self.id or is_new
-        attr_2 = data['teamA'] == is_new or (data['teamA'] == self.teamA.id)
-        attr_3 = data['teamB'] == is_new or (data['teamB'] == self.teamB.id)
+        attr_2 = data['teamA'] == self.teamA
+        attr_3 = data['teamB'] == self.teamB
         attr_4 = data['stat'] == self.state
         attr_5 = data['result'] == self.result
 
@@ -84,13 +84,10 @@ class Match:
             self.result = data['match']['result']
 
     def destroy(self):
-        self.teamA.matches.remove(self)
-        self.teamB.matches.remove(self)
+        pass
 
     def __str__(self):
         copy = deepcopy(self)
-        del copy.teamA
-        del copy.teamB
         return copy.__dict__.__str__()
 
     def __repr__(self):

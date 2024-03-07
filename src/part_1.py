@@ -1,5 +1,5 @@
 from requests import get, post, delete
-from .models import Director
+from .models import Team
 from .utils import __show, __skip_exception
 
 
@@ -7,18 +7,18 @@ BASE_URL = 'http://localhost:3000'
 
 
 @__skip_exception
-def get_all_directors(directors: list[Director], *, show=False):
+def get_all_teams(teams: list[Team], *, show=False):
     url = f'{BASE_URL}/directors'
     response = get(url)
     body = response.json()
 
     if show:
-        __show(body, directors)
+        __show(body, teams)
 
-    if len(body) == len(directors):
+    if len(body) == len(teams):
         content_match = all(
-            director.is_valid(body[i])
-            for i, director in enumerate(directors)
+            team.is_valid(body[i])
+            for i, team in enumerate(teams)
         )
 
         return content_match
@@ -27,20 +27,20 @@ def get_all_directors(directors: list[Director], *, show=False):
 
 
 @__skip_exception
-def post_director(director: Director, *, show=False):
-    url = f'{BASE_URL}/directors'
-    data = director.data()
+def post_team(team: Team, *, show=False):
+    url = f'{BASE_URL}/teams'
+    data = team.data()
     response = post(url, json=data)
     body = response.json()
 
     if show:
-        __show(body, director)
+        __show(body, team)
 
     if response.status_code >= 400:
         return False
 
-    if director.is_valid(body, is_new=True):
-        director.id = body['id']
+    if team.is_valid(body, is_new=True):
+        team.id = body['id']
 
         return True
 
@@ -48,20 +48,20 @@ def post_director(director: Director, *, show=False):
 
 
 @__skip_exception
-def get_director(director: Director, *, show=False):
-    url = f'{BASE_URL}/director/{director.id}'
+def get_team(team: Team, *, show=False):
+    url = f'{BASE_URL}/team/{team.id}'
     response = get(url)
     body = response.json()
 
     if show:
-        __show(body, director)
+        __show(body, team)
 
-    return director.is_valid(body)
+    return team.is_valid(body)
 
 
 @__skip_exception
-def delete_director(directors: list[Director], director: Director, *, show=False):
-    url = f'{BASE_URL}/director/{director.id}'
+def delete_team(teams: list[Team], team: Team, *, show=False):
+    url = f'{BASE_URL}/team/{team.id}'
     response = delete(url)
     body = response.json()
 
@@ -69,7 +69,7 @@ def delete_director(directors: list[Director], director: Director, *, show=False
         __show(body, {})
 
     if body == {}:
-        directors.remove(director)
+        teams.remove(team)
 
         return True
 
@@ -77,8 +77,8 @@ def delete_director(directors: list[Director], director: Director, *, show=False
 
 
 @__skip_exception
-def delete_all_directors(*, show=False):
-    url = f'{BASE_URL}/directors'
+def delete_all_teams(*, show=False):
+    url = f'{BASE_URL}/teams'
     response = delete(url)
     body = response.json()
 
@@ -88,23 +88,22 @@ def delete_all_directors(*, show=False):
     return body == []
 
 
-@__skip_exception
-def get_oscars(directors: list[Director], *, show=False):
-    url = f'{BASE_URL}/directors/oscars'
-    response = get(url)
-    body = response.json()
+# @__skip_exception
+# def get_city(teams: list[Team], *, show=False):
+#     url = f'{BASE_URL}/team/city'
+#     response = get(url)
+#     body = response.json()
 
-    oscars = list(filter(lambda x: x.has_oscars, directors))
 
-    if show:
-        __show(body, oscars)
+#     if show:
+#         __show(body, team.city)
 
-    if len(body) == len(oscars):
-        content_match = all(
-            oscars[i].is_valid(body[i])
-            for i in range(len(oscars))
-        )
+#     if len(body) == len(team.city):
+#         content_match = all(
+#             team.city[i].is_valid(body[i])
+#             for i in range(len(team.city))
+#         )
 
-        return content_match
+#         return content_match
 
-    return False
+#     return False
