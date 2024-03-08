@@ -28,7 +28,7 @@ def get_team_matches(team, *, show=False):
 
 @__skip_exception
 def post_match(teamA, teamB, match, *, show=False):
-    url = f'{BASE_URL}/matches/{match.id}'
+    url = f'{BASE_URL}/matches'
     data = match.data()
     response = post(url, json=data)
     body = response.json()

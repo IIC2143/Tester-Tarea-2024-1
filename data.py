@@ -125,7 +125,10 @@ PLAYERS_A = [
     Player('Felipe Loyola', 4, 1, 5),
     Player('Sebatian Saez', 2, 1, 0),
     Player('Ignacio Jeraldino',4,0,3),
-    Player('Felipe Flores', 3, 2, 1)
+    Player('Felipe Flores', 3, 2, 1),
+    Player('Chupete Suazo', 12, 1, 0),
+    Player('Andrés Chavez',1,1,3),
+    Player('Hugo Araya', 3, 0, 1)
     ]
 
 PLAYERS_B = [
@@ -135,7 +138,9 @@ PLAYERS_B = [
     Player('Cristian Palacios', 2, 1, 0),
     Player('Felipe Flores',4,0,3),
     Player('Emiliano Vecchio', 3, 2, 1),
-    Player('Patricio Rubio', 1, 0, 0)
+    Player('Patricio Rubio', 1, 0, 0),
+    Player('Kevin Mendez', 5, 2, 1),
+    Player('Manuel Fernandez', 1, 2, 0)
 ]
 
 PLAYERS_C = [
@@ -145,11 +150,14 @@ PLAYERS_C = [
     Player('Matias Rodriguez', 0, 2, 0),
     Player('Edson Puch', 2, 0, 2),
     Player('Felipe Fritz', 0, 0, 0),
-    Player('Diego Sanchez', 0, 0, 0)
+    Player('Diego Sanchez', 0, 0, 0),
+    Player('Pablo Parra', 0, 3, 0),
+    Player('Ricardo Matamala', 1, 0, 1)
 ]
 
 WRONG_PLAYERS = [
-    Player('', 1, 0, 0)
+    Player('', 1, 0, 0),
+    Player(2,'Juan López',0,0)
     ]
 
 
