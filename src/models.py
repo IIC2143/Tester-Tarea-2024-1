@@ -61,10 +61,10 @@ class Team:
 
 class Match:
 
-    def __init__(self, teamA, teamB,state, result):
+    def __init__(self,state, result):
         self.id = None
-        self.teamA = teamA
-        self.teamB = teamB
+        self.teamA = None
+        self.teamB = None
         self.state = state
         self.result = result
 
@@ -79,8 +79,8 @@ class Match:
 
     def is_valid(self, data, is_new=False):
         attr_1 = data['id'] == self.id or is_new
-        attr_2 = data['teamA'] == self.teamA
-        attr_3 = data['teamB'] == self.teamB
+        attr_2 = data['teamA'] == self.teamA or is_new
+        attr_3 = data['teamB'] == self.teamB or is_new
         attr_4 = data['stat'] == self.state
         attr_5 = data['result'] == self.result
 

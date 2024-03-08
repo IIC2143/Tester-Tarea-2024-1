@@ -6,7 +6,6 @@ from src.part_1 import (
     get_team,
     delete_team,
     delete_all_teams,
-    get_oscars,
 )
 
 from src.part_2 import (
