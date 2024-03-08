@@ -1,7 +1,7 @@
 from src.models import Team, Match, Player
 
 
-TEAM_A = [
+TEAMS_A = [
     Team('Cobreloa', 'Zorros del desierto', 12102, 'Calama'),
     Team('Cobresal', 'El Cobre', 11240, 'El Salvador'),
     Team('Huachipato', 'Huachipato-CAP Acero', 10050, 'Talcahuano'),
@@ -14,7 +14,7 @@ TEAM_A = [
     Team('San Luis de Quillota', 'Municipal Lucio Fariña Fernández', 7860, 'Quillota')
 ]
 
-TEAM_B = [
+TEAMS_B = [
     Team('Universidad de Chile', 'No tienen :(', 0, 'Ñuñoa'),
     Team('Universidad Católica', 'San Carlos de Apoquindo', 16000, 'Las Condes'),
     Team('Unión Española', 'Santa Laura', 19887, 'Independencia'),
@@ -27,7 +27,7 @@ TEAM_B = [
     Team('Deportes Puerto Montt', 'Chinquihue', 8000, 'Puerto Montt')
 ]
 
-TEAM_C = [
+TEAMS_C = [
     Team('Everton', 'Sausalito', 22000, 'Viña del Mar'),
     Team('Santiago Wanderers', 'Elías Figueroa Brander', 18000, 'Valparaíso'),
     Team('Deportes Iquique', 'Cavancha', 10000, 'Iquique'),
@@ -68,54 +68,54 @@ WRONG_TEAMS_2 = [
 ]
 
 MATCHES_A = [
-    Match('played', '2-1'),
-    Match('played', '1-1'),
-    Match('played', '0-0'),
-    Match('played', '3-1'),
-    Match('played', '1-0'),
-    Match('Not played', '--'),
-    Match('Not played', '--'),
-    Match('Not played', '--'),
-    Match('Not played', '--'),
-    Match('Not played', '--')
+    Match(True, '2-1'),
+    Match(True, '1-1'),
+    Match(True, '0-0'),
+    Match(True, '3-1'),
+    Match(True, '1-0'),
+    Match(False, '--'),
+    Match(False, '--'),
+    Match(False, '--'),
+    Match(False, '--'),
+    Match(False, '--')
 ]
 
 MATCHES_B = [
-    Match('played', '2-1'),
-    Match('played', '3-2'),
-    Match('played', '0-0'),
-    Match('played', '3-4'), 
-    Match('played', '6-0'),
-    Match('Not played', '--'),
-    Match('Not played', '--'),
-    Match('Not played', '--'),
-    Match('Not played', '--'),
-    Match('Not played', '--')
+    Match(True, '2-1'),
+    Match(True, '3-2'),
+    Match(True, '0-0'),
+    Match(True, '3-4'), 
+    Match(True, '6-0'),
+    Match(False, '--'),
+    Match(False, '--'),
+    Match(False, '--'),
+    Match(False, '--'),
+    Match(False, '--')
 ]
 
 MATCHES_C  = [
-    Match('played', '2-2'),
-    Match('played', '3-1'),
-    Match('played', '5-0'),
-    Match('played', '5-6'),
-    Match('played', '0-0'),
-    Match('Not played', '--'),
-    Match('Not played', '--'),
-    Match('Not played', '--'),
-    Match('Not played', '--'),
-    Match('Not played', '--')
+    Match(True, '2-2'),
+    Match(True, '3-1'),
+    Match(True, '5-0'),
+    Match(True, '5-6'),
+    Match(True, '0-0'),
+    Match(False, '--'),
+    Match(False, '--'),
+    Match(False, '--'),
+    Match(False, '--'),
+    Match(False, '--')
 ]
 
 WRONG_MATCHES = [
     Match('','1-1'),
-    Match('played', ''),
+    Match(True, ''),
     Match('','--')
 ]
 
 WRONG_MATCHES_2 = [
     Match('','2-1'),
-    Match('Not played',''),
-    Match('played',''),
+    Match(False,''),
+    Match(True,''),
     Match('','--')
 ]
 
@@ -148,7 +148,7 @@ PLAYERS_C = [
     Player('Diego Sanchez', 0, 0, 0)
 ]
 
-PLAYERS_WRONG = [
+WRONG_PLAYERS = [
     Player('', 1, 0, 0)
     ]
 

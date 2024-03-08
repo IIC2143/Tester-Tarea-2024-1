@@ -7,20 +7,24 @@ BASE_URL = 'http://localhost:3000'
 
 
 @__skip_exception
-def post_ranking(director, ranking, *, show=False):
-    url = f'{BASE_URL}/ranking/{director.id}'
-    data = ranking.data()
+def post_player(team, player, *, show=False):
+    url = f'{BASE_URL}/player/{team.id}'
+    data = player.data()
     response = post(url, json=data)
     body = response.json()
 
     if show:
-        __show(body, ranking)
+        __show(body, player)
 
-    if ranking.is_valid(body, is_new=True):
-        director.rankings.append(ranking)
-        ranking.id = body['id']
-        ranking.director = director
-        ranking.director_id = director.id
+    if player.is_valid(body, is_new=True):
+        team.players.append(player)
+        player.id = body['id']
+        player.name = body['name']
+        player.goal = body['goal']
+        player.asist = body['asist']
+        player.card = body['card']
+        player.team = team
+        player.team_id = team.id
 
         return True
 
@@ -28,18 +32,18 @@ def post_ranking(director, ranking, *, show=False):
 
 
 @__skip_exception
-def get_director_rankings(director, *, show=False):
-    url = f'{BASE_URL}/ranking/{director.id}'
+def get_team_players(team, *, show=False):
+    url = f'{BASE_URL}/ranking/{team.id}'
     response = get(url)
     body = response.json()
 
     if show:
-        __show(body, director.rankings)
+        __show(body, team.players)
 
-    if len(body) == len(director.rankings):
+    if len(body) == len(team.players):
         content_match = all(
-            ranking.is_valid(body[i])
-            for i, ranking in enumerate(director.rankings)
+            player.is_valid(body[i])
+            for i, player in enumerate(team.players)
         )
 
         return content_match
@@ -48,41 +52,85 @@ def get_director_rankings(director, *, show=False):
 
 
 @__skip_exception
-def get_ranking_top(rankings, quantity, *, show=False):
-    url = f'{BASE_URL}/ranking/top/{quantity}'
+def get_player_top_goals(player, quantity, *, show=False):
+    url = f'{BASE_URL}/player/topGoals/{quantity}'
     response = get(url)
     body = response.json()
 
-    rankings_copy = deepcopy(rankings)
+    players_copy = deepcopy(player)
 
-    sorted_rankings = sorted(rankings_copy, key=lambda ranking: ranking.true_score(), reverse=True)
-    selected = sorted_rankings[:quantity]
+    sorted_player = sorted(players_copy, key=lambda player: player.goal, reverse=True)
+    selected = sorted_player[:quantity]
 
     if show:
         __show(body, selected)
 
     if len(selected) == len(body) == quantity:
         return all(
-            ranking.is_valid(body[i])
-            for i, ranking in enumerate(selected)
+            player.is_valid(body[i])
+            for i, player in enumerate(selected)
         )
 
     return False
 
+@__skip_exception
+def get_player_top_cards(player, quantity, *, show=False):
+    url = f'{BASE_URL}/player/topCards/{quantity}'
+    response = get(url)
+    body = response.json()
+
+    players_copy = deepcopy(player)
+
+    sorted_player = sorted(players_copy, key=lambda player: player.card, reverse=True)
+    selected = sorted_player[:quantity]
+
+    if show:
+        __show(body, selected)
+
+    if len(selected) == len(body) == quantity:
+        return all(
+            player.is_valid(body[i])
+            for i, player in enumerate(selected)
+        )
+
+    return False
 
 @__skip_exception
-def get_ranking_from_movie(movie, *, show=False): #B
-    url = f'{BASE_URL}/movies/{movie.id}/director/rankings'
+def get_player_top_assists(player, quantity, *, show=False):
+    url = f'{BASE_URL}/player/topGoals/{quantity}'
+    response = get(url)
+    body = response.json()
+
+    players_copy = deepcopy(player)
+
+    sorted_player = sorted(players_copy, key=lambda player: player.assist, reverse=True)
+    selected = sorted_player[:quantity]
+
+    if show:
+        __show(body, selected)
+
+    if len(selected) == len(body) == quantity:
+        return all(
+            player.is_valid(body[i])
+            for i, player in enumerate(selected)
+        )
+
+    return False
+
+#esto lo podriamos hacer con matches pero tendriamos que especificar si es el team A o B
+@__skip_exception
+def get_player_from_team(team, *, show=False): 
+    url = f'{BASE_URL}/teams/{team.id}/players'
     response = get(url)
     body = response.json()
 
     if show:
-        __show(body, movie.director.rankings)
+        __show(body, team.players)
 
-    if len(body) == len(movie.director.rankings):
+    if len(body) == len(team.players):
         content_match = all(
-            ranking.is_valid(body[i])
-            for i, ranking in enumerate(movie.director.rankings)
+            player.is_valid(body[i])
+            for i, player in enumerate(team.players)
         )
 
         return content_match
@@ -91,66 +139,34 @@ def get_ranking_from_movie(movie, *, show=False): #B
 
 
 @__skip_exception
-def delete_worst_director(directors, rankings, movies, *, show=False): #B
-    url = f'{BASE_URL}/director/ranking/low'
+def delete_worst_team(teams, matches, players, *, show=False): #B
+    url = f'{BASE_URL}/teams/matches/low'
     response = delete(url)
     body = response.json()
 
-    lowest_ranking = min(rankings, key=lambda ranking: ranking.true_score())
-    director = lowest_ranking.director
+    lowest_team = min(teams, key=lambda team: team.calculate_points())
+
 
     if show:
-        __show(body, director)
+        __show(body, lowest_team)
 
-    if director.is_valid(body):
-        for movie in director.movies:
+    if lowest_team.is_valid(body):
+        for match in lowest_team.matches:
             # movie.destroy()
-            movies.remove(movie)
+            matches.remove(match)
 
-        for ranking in director.rankings:
+        for player in lowest_team.players:
             # ranking.destroy()
-            rankings.remove(ranking)
+            players.remove(player)
 
-        director.destroy()
-        directors.remove(director)
+        lowest_team.destroy()
+        lowest_team.remove(lowest_team)
 
         return True
 
     return False
+        
 
-
-@__skip_exception
-def get_ranking_pages(rankings, *, show=False):
-    url = f'{BASE_URL}/ranking/pages/all'
-    response = get(url)
-    body = response.json()
-
-    print(body)
-    
-
-    expected = {
-        'imdb': [
-            ranking for ranking in rankings if ranking.page == 'imdb'
-        ],
-        'rotten_tomatoes': [
-            ranking for ranking in rankings if ranking.page == 'rotten_tomatoes'
-        ],
-        'metacritic': [
-            ranking for ranking in rankings if ranking.page == 'metacritic'
-        ],
-    }
-
-    print(expected)
-
-    if show:
-        __show(body, expected)
-
-    for page in expected:
-        if len(body[page]) != len(expected[page]):
-            return False
-
-        for i, ranking in enumerate(expected[page]):
-            if not ranking.is_valid(body[page][i]):
-                return False
-
-    return True
+#en caso de hacer una request de tabla de posicion
+def create_table_of_positions(teams):
+    table = sorted(teams, key=lambda team: team.points, reverse=True)

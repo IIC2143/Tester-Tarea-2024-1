@@ -3,7 +3,7 @@ from copy import deepcopy
 
 
 def __show_element(element_):
-    omit_keys = ['created_at', 'updated_at', 'movies', 'rankings', 'director']
+    omit_keys = ['created_at', 'updated_at', 'team', 'players', 'matches']
 
     element = deepcopy(element_)
 

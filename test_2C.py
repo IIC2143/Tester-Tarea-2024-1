@@ -1,61 +1,60 @@
 from copy import deepcopy
 
 from src.part_1 import (
-    get_all_directors,
-    post_director,
-    get_director,
-    delete_director,
-    delete_all_directors,
-    get_oscars,
+    get_all_teams,
+    post_team,
+    get_team,
+    delete_team,
+    delete_all_teams,
 )
 
 from src.part_2 import (
-    get_director_movies,
-    post_movie,
-    patch_movie,
-    get_movies_by_keyword,
+    get_team_matches,
+    post_match,
+    patch_match,
+    get_matches_by_team,
 )
 
-from data import DIRECTORS_C, MOVIES_C, WRONG_MOVIES_2, WRONG_DIRECTORS_2
+from data import TEAMS_C, MATCHES_C, WRONG_MATCHES_2, WRONG_TEAMS_2
 
 
 def test_2C():
-    directors = deepcopy(DIRECTORS_C)
-    bad_directors = deepcopy(WRONG_DIRECTORS_2)
-    movies = deepcopy(MOVIES_C)
-    bad_movies = deepcopy(WRONG_MOVIES_2)
+    teams = deepcopy(TEAMS_C)
+    bad_teams = deepcopy(WRONG_TEAMS_2)
+    matches = deepcopy(MATCHES_C)
+    bad_matches = deepcopy(WRONG_MATCHES_2)
 
     results = {
-        1: delete_all_directors(),
-        2: post_director(directors[0]),
-        3: post_director(directors[1]),
-        4: post_director(directors[2]),
-        5: get_all_directors(directors),
-        6: post_movie(directors[0], movies[0]),
-        7: post_movie(directors[0], movies[1]),
-        8: post_movie(directors[1], movies[2]),
-        9: post_movie(directors[1], movies[3]),
-        10: post_movie(directors[2], movies[4]),
-        11: post_movie(directors[2], movies[5]),
-        12: get_director_movies(directors[0]),
-        13: get_director_movies(directors[1]),
-        14: get_director_movies(directors[2]),
-        15: get_movies_by_keyword(movies, 'US'),
-        16: get_movies_by_keyword(movies, 'death'),
-        17: delete_director(directors, directors[0]),
-        18: not post_movie(directors[1], bad_movies[0]),
-        19: patch_movie(movies[4], {'movie': {'title': 'Talk to her'}}),
-        20: not patch_movie(movies[0], {'movie': {'title': ''}}),
-        21: not get_all_directors(bad_directors),
-        22: not get_director(bad_directors[0]),
-        23: not post_movie(bad_directors[0], bad_movies[0]),
-        24: not get_director_movies(bad_directors[0]),
-        25: not get_movies_by_keyword(bad_movies, ''),
-        26: not delete_director(bad_directors, bad_directors[0]),
-        27: not patch_movie(bad_movies[0], {'movie': {'title': ''}}),
-        28: not patch_movie(bad_movies[0], {'movie': {'title': 'Into the wild'}}),
-        29: delete_director(directors, directors[1]),
-        30: get_all_directors(directors),
+        1: delete_all_teams(),
+        2: post_team(teams[0]),
+        3: post_team(teams[1]),
+        4: post_team(teams[2]),
+        5: get_all_teams(teams),
+        6: post_match(teams[0],teams[1], matches[0]),
+        7: post_match(teams[0], teams[2], matches[1]),
+        8: post_match(teams[1], teams[3], matches[2]),
+        9: post_match(teams[1], teams[2], matches[3]),
+        10: post_match(teams[2], teams[4], matches[4]),
+        11: post_match(teams[2], teams[6], matches[5]),
+        12: get_team_matches(teams[0]),
+        13: get_team_matches(teams[1]),
+        14: get_team_matches(teams[2]),
+        15: get_matches_by_team(matches, 'Everton'),
+        16: get_matches_by_team(matches, 'Huachipato'),
+        17: delete_team(teams, teams[0]),
+        18: not post_match(teams[1], teams[5], bad_matches[0]),
+        19: patch_match(matches[4], {'match': {'teamA': teams[3]}}),
+        20: not patch_match(matches[0], {'match': {'teamB': teams[5]}}),
+        21: not get_all_teams(bad_teams),
+        22: not get_team(bad_teams[0]),
+        23: not post_match(bad_teams[0], bad_teams[3], bad_matches[0]),
+        24: not get_team_matches(bad_teams[0]),
+        25: not get_matches_by_team(bad_matches, ''),
+        26: not delete_team(bad_teams, bad_teams[0]),
+        27: not patch_match(bad_matches[0], {'match': {'teamA': bad_teams[0]}}),
+        28: not patch_match(bad_matches[0], {'match': {'teamB': bad_teams[2]}}),
+        29: delete_team(teams, teams[1]),
+        30: get_all_teams(teams),
     }
 
     return results

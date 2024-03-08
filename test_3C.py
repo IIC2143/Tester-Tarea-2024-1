@@ -1,95 +1,96 @@
 from copy import deepcopy
 
 from src.part_1 import (
-    get_all_directors,
-    post_director,
-    get_director,
-    delete_director,
-    delete_all_directors,
+    get_all_teams,
+    post_team,
+    get_team,
+    delete_team,
+    delete_all_teams,
     get_oscars,
 )
 
 from src.part_2 import (
-    get_director_movies,
-    post_movie,
-    patch_movie,
-    get_movies_by_keyword,
+    get_team_matches,
+    post_match,
+    patch_match,
+    get_matches_by_team,
 )
 
 from src.part_3 import (
-    post_ranking,
-    get_director_rankings,
-    get_ranking_top,
-    get_ranking_from_movie,
-    delete_worst_director,
-    get_ranking_pages,
+    post_player,
+    get_team_players,
+    get_player_top_goals,
+    get_player_top_assists,
+    get_player_top_cards,
+    get_player_from_team,
+    delete_worst_team,
 )
 
 from data import (
-    DIRECTORS_C, MOVIES_C, RANKINGS_C,
-    WRONG_MOVIES_2, WRONG_DIRECTORS_2, WRONG_RANKINGS,
+    TEAMS_C, MATCHES_C, PLAYERS_C,
+    WRONG_MATCHES_2, WRONG_TEAMS_2, WRONG_PLAYERS,
 )
 
 
 def test_3C():
-    directors = deepcopy(DIRECTORS_C)
-    bad_directors = deepcopy(WRONG_DIRECTORS_2)
-    movies = deepcopy(MOVIES_C)
-    bad_movies = deepcopy(WRONG_MOVIES_2)
-    rankings = deepcopy(RANKINGS_C)
-    bad_rankings = deepcopy(WRONG_RANKINGS)
+    teams = deepcopy(TEAMS_C)
+    bad_teams = deepcopy(WRONG_TEAMS_2)
+    matches = deepcopy(MATCHES_C)
+    bad_matches = deepcopy(WRONG_MATCHES_2)
+    players = deepcopy(PLAYERS_C)
+    bad_players = deepcopy(WRONG_PLAYERS)
 
     results = {
-        1: delete_all_directors(),
-        2: post_director(directors[0]),
-        3: post_director(directors[1]),
-        4: not post_director(bad_directors[0]),
-        5: not post_director(bad_directors[1]),
-        6: post_director(directors[2]),
-        7: not post_director(bad_directors[2]),
-        8: get_all_directors(directors),
-        9: get_director(directors[0]),
-        10: get_director(directors[1]),
-        11: not get_director(bad_directors[0]),
-        12: not get_oscars(directors + bad_directors),
-        13: post_movie(directors[0], movies[0]),
-        14: post_movie(directors[0], movies[1]),
-        15: get_oscars(directors),
-        16: post_movie(directors[1], movies[2]),
-        17: post_movie(directors[2], movies[3]),
-        18: patch_movie(movies[3], {'movie': {'title': 'You talkin to me?'}}),
-        19: get_director_movies(directors[0]),
-        20: get_director_movies(directors[1]),
-        21: get_director_movies(directors[2]),
-        22: get_movies_by_keyword(movies, 'teenagers'),
-        23: get_movies_by_keyword(movies, 'death'),
-        24: not get_movies_by_keyword(movies, ''),
-        25: not delete_director(directors, bad_directors[0]),
-        26: not delete_director(bad_directors, bad_directors[0]),
-        27: post_ranking(directors[0], rankings[0]),
-        28: post_ranking(directors[0], rankings[1]),
-        29: post_ranking(directors[0], rankings[2]),
-        30: post_ranking(directors[1], rankings[3]),
-        31: post_ranking(directors[1], rankings[4]),
-        32: post_ranking(directors[1], rankings[5]),
-        33: post_ranking(directors[2], rankings[6]),
-        34: post_ranking(directors[2], rankings[7]),
-        35: post_ranking(directors[2], rankings[8]),
-        36: get_director_rankings(directors[0]),
-        37: get_director_rankings(directors[1]),
-        38: get_ranking_top(rankings, 3),
-        39: get_ranking_from_movie(movies[0]),
-        40: get_ranking_from_movie(movies[1]),
-        41: delete_worst_director(directors, rankings, movies),
-        42: get_director_rankings(directors[0]),
-        43: not post_ranking(directors[0], bad_rankings[0]),
-        44: not post_ranking(directors[0], bad_rankings[1]),
-        45: not post_movie(directors[0], bad_movies[0]),
-        46: not post_movie(directors[0], bad_movies[1]),
-        47: not patch_movie(movies[0], {'movie': {'sinopsis': ''}}),
-        48: not patch_movie(movies[0], {'movie': {'title': ''}}),
-        49: get_all_directors(directors),
-        50: delete_all_directors(),
+        1: delete_all_teams(),
+        2: post_team(teams[0]),
+        3: post_team(teams[1]),
+        4: not post_team(bad_teams[0]),
+        5: not post_team(bad_teams[1]),
+        6: post_team(teams[2]),
+        7: not post_team(bad_teams[2]),
+        8: post_team(teams[3]),
+        9: get_all_teams(teams),
+        10: get_team(teams[0]),
+        11: not get_team(bad_teams[0]),
+        12: get_team(teams[1]),
+        13: post_match(teams[0],teams[1], matches[0]),
+        14: post_match(teams[0], teams[2], matches[1]),
+        15: post_match(teams[1], teams[3], matches[4]),
+        16: post_match(teams[1], teams[2], matches[2]),
+        17: post_match(teams[2], teams[3], matches[3]),
+        18: patch_match(matches[3], {'match': {'teamA': teams[1]}}),
+        19: get_team_matches(teams[0]),
+        20: get_team_matches(teams[1]),
+        21: get_team_matches(teams[2]),
+        22: get_matches_by_team(matches, 'Deportes Iquique'),
+        23: get_matches_by_team(matches, 'Cobresal'),
+        24: not get_matches_by_team(matches, 'Unión Española'),
+        25: not delete_team(teams, bad_teams[0]),
+        26: not delete_team(bad_teams, bad_teams[0]),
+        27: post_player(teams[0], players[0]),
+        28: post_player(teams[0], players[1]),
+        29: post_player(teams[0], players[2]),
+        30: post_player(teams[1], players[3]),
+        31: post_player(teams[1], players[4]),
+        32: post_player(teams[1], players[5]),
+        33: post_player(teams[2], players[6]),
+        34: post_player(teams[2], players[7]),
+        35: post_player(teams[2], players[8]),
+        36: get_team_players(teams[0]),
+        37: get_team_players(teams[1]),
+        38: get_player_top_assists(players, 3),
+        39: get_player_from_team(teams[0]),
+        40: get_player_from_team(teams[1]),
+        41: delete_worst_team(teams, players, matches),
+        42: get_team_players(teams[0]),
+        43: not post_player(teams[0], bad_players[0]),
+        44: not post_player(teams[0], bad_players[1]),
+        45: not post_match(teams[0], bad_matches[0]),
+        46: not post_match(teams[0], bad_matches[1]),
+        47: not patch_match(matches[0], {'match': {'teamB': teams[3]}}),
+        48: not patch_match(matches[0], {'match': {'teamA': teams[1]}}),
+        49: get_all_teams(teams),
+        50: delete_all_teams(),
     }
 
     return results

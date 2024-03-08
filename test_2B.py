@@ -1,50 +1,49 @@
 from copy import deepcopy
 
 from src.part_1 import (
-    get_all_directors,
-    post_director,
-    get_director,
-    delete_director,
-    delete_all_directors,
-    get_oscars,
+    get_all_teams,
+    post_team,
+    get_team,
+    delete_team,
+    delete_all_teams,
 )
 
 from src.part_2 import (
-    get_director_movies,
-    post_movie,
-    patch_movie,
-    get_movies_by_keyword,
+    get_team_matches,
+    post_match,
+    patch_match,
+    get_matches_by_team,
 )
 
-from data import DIRECTORS_B, MOVIES_B, WRONG_MOVIES
+from data import TEAMS_B, MATCHES_B, WRONG_MATCHES
 
 
 def test_2B():
-    directors = deepcopy(DIRECTORS_B)
-    movies = deepcopy(MOVIES_B)
-    bad_movies = deepcopy(WRONG_MOVIES)
+    teams = deepcopy(TEAMS_B)
+    matches = deepcopy(MATCHES_B)
+    bad_matchs = deepcopy(WRONG_MATCHES)
 
     results = {
-        1: delete_all_directors(),
-        2: post_director(directors[0]),
-        3: post_director(directors[1]),
-        4: post_director(directors[2]),
-        5: get_all_directors(directors),
-        6: post_movie(directors[0], movies[0]),
-        7: post_movie(directors[0], movies[1]),
-        8: post_movie(directors[1], movies[2]),
-        9: post_movie(directors[1], movies[3]),
-        10: post_movie(directors[2], movies[4]),
-        11: post_movie(directors[2], movies[5]),
-        12: get_director_movies(directors[0]),
-        13: get_director_movies(directors[1]),
-        14: get_director_movies(directors[2]),
-        15: get_movies_by_keyword(movies, 'US'),
-        16: get_movies_by_keyword(movies, 'death'),
-        17: delete_director(directors, directors[0]),
-        18: not post_movie(directors[1], bad_movies[0]),
-        19: patch_movie(movies[4], {'movie': {'title': 'Talk to her'}}),
-        20: not patch_movie(movies[0], {'movie': {'title': ''}}),
+        1: delete_all_teams(),
+        2: post_team(teams[0]),
+        3: post_team(teams[1]),
+        4: post_team(teams[2]),
+        5: get_all_teams(teams),
+        6: post_match(teams[0],teams[1], matches[0]),
+        7: post_match(teams[0],teams[2], matches[1]),
+        8: post_match(teams[1], teams[0], matches[2]),
+        9: post_match(teams[1],teams[2], matches[3]),
+        10: post_match(teams[2], teams[1], matches[4]),
+        11: post_match(teams[2],teams[0], matches[5]),
+        12: get_team_matches(teams[0]),
+        13: get_team_matches(teams[1]),
+        14: get_team_matches(teams[2]),
+        15: get_matches_by_team(matches, 'Universidad de Chile'),
+        16: get_matches_by_team(matches, 'Universidad Católica'),
+        17: delete_team(teams, teams[0]),
+        18: not post_match(teams[1], teams[0], bad_matchs[0]),
+        19: patch_match(matches[4], {'match': {'teamA': teams[2]}}),
+        20: not patch_match(matches[0], {'match': {'teamB': teams[2]}}),
     }
 
     return results

@@ -8,7 +8,7 @@ BASE_URL = 'http://localhost:3000'
 
 @__skip_exception
 def get_team_matches(team, *, show=False):
-    url = f'{BASE_URL}/team/{team.id}/matches'
+    url = f'{BASE_URL}/teams/{team.id}/matches'
     response = get(url)
     body = response.json()
 
@@ -78,7 +78,7 @@ def patch_match(match, new_match_data, *, show=False):
 
 
 @__skip_exception
-def get_match_by_team(matches, team, *, show=False):
+def get_matches_by_team(matches, team, *, show=False):
     url = f'{BASE_URL}/matches/{team}'
     response = get(url)
     body = response.json()
@@ -86,7 +86,7 @@ def get_match_by_team(matches, team, *, show=False):
     filtered_matches = [
         match
         for match in matches
-        if team in match.teamA or team in match.teamB
+        if team in match.teamA.name or team in match.teamB.name
     ]
 
     if show:

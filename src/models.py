@@ -30,6 +30,16 @@ class Team:
         attr_5 = data['city'] == self.city
 
         return all([attr_1, attr_2, attr_3, attr_4, attr_5])
+    
+    def calculate_points(self):
+        points = 0
+        for match in self.matches:
+            if match.state:
+                if match.winner() == self:
+                    points += 3
+                elif match.winner() == None:
+                    points += 1
+        return points
 
     def destroy(self):
         for match in self.mathces:
@@ -83,6 +93,16 @@ class Match:
         if 'result' in data['match']:
             self.result = data['match']['result']
 
+    def winner(self):
+        if self.state:
+            if self.result[0] > self.result[2]:
+                return self.teamA
+
+            if self.result[0] < self.result[2]:
+                return self.teamB
+        return None
+
+
     def destroy(self):
         pass
 
@@ -96,20 +116,21 @@ class Match:
 
 class Player:
 
-    def __init__(self, name, goal, asist, card):
+    def __init__(self, name, goal, assist, card):
         self.id = None
         self.name = name
         self.goal = goal
-        self.asist = asist
+        self.assist = assist
         self.card = card
         self.team = None
+        self.team_id = None
 
     def data(self):
         return {
             'player': {
                 'name': self.name,
                 'goal': self.goal,
-                'asist': self.asist,
+                'assist': self.assist,
                 'card': self.card,
             },
         }
@@ -118,11 +139,12 @@ class Player:
         attr_1 = data['id'] == self.id or is_new
         attr_2 = data['name'] == self.name
         attr_3 = float(data['goal']) == float(self.goal)
-        attr_4 = float(data['asist']) == float(self.asist)
+        attr_4 = float(data['assist']) == float(self.assist)
         attr_5 = float(data['card']) == float(self.card)
-        attr_6 = is_new or data['team_id'] == self.team.id
+        attr_6 = data['team'] == self.team
+        attr_7 = is_new or data['team_id'] == self.team.id
 
-        return all([attr_1, attr_2, attr_3, attr_4, attr_5, attr_6])
+        return all([attr_1, attr_2, attr_3, attr_4, attr_5, attr_6, attr_7])
 
     def destroy(self):
         self.team.players.remove(self)

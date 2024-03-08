@@ -8,7 +8,7 @@ BASE_URL = 'http://localhost:3000'
 
 @__skip_exception
 def get_all_teams(teams: list[Team], *, show=False):
-    url = f'{BASE_URL}/directors'
+    url = f'{BASE_URL}/teams'
     response = get(url)
     body = response.json()
 
@@ -49,7 +49,7 @@ def post_team(team: Team, *, show=False):
 
 @__skip_exception
 def get_team(team: Team, *, show=False):
-    url = f'{BASE_URL}/team/{team.id}'
+    url = f'{BASE_URL}/teams/{team.id}'
     response = get(url)
     body = response.json()
 
@@ -61,7 +61,7 @@ def get_team(team: Team, *, show=False):
 
 @__skip_exception
 def delete_team(teams: list[Team], team: Team, *, show=False):
-    url = f'{BASE_URL}/team/{team.id}'
+    url = f'{BASE_URL}/teams/{team.id}'
     response = delete(url)
     body = response.json()
 

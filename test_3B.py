@@ -1,70 +1,70 @@
 from copy import deepcopy
 
 from src.part_1 import (
-    get_all_directors,
-    post_director,
-    get_director,
-    delete_director,
-    delete_all_directors,
-    get_oscars,
+    get_all_teams,
+    post_team,
+    get_team,
+    delete_team,
+    delete_all_teams,
 )
 
 from src.part_2 import (
-    get_director_movies,
-    post_movie,
-    patch_movie,
-    get_movies_by_keyword,
+    get_team_matches,
+    post_match,
+    patch_match,
+    get_matches_by_team,
 )
 
 from src.part_3 import (
-    post_ranking,
-    get_director_rankings,
-    get_ranking_top,
-    get_ranking_from_movie,
-    delete_worst_director,
-    get_ranking_pages,
+    post_player,
+    get_team_players,
+    get_player_top_goals,
+    get_player_top_assists,
+    get_player_top_cards,
+    get_player_from_team,
+    delete_worst_team,
 )
 
-from data import DIRECTORS_B, MOVIES_B, RANKINGS_B
+from data import TEAMS_B, MATCHES_B, PLAYERS_B
 
 
 def test_3B():
-    directors = deepcopy(DIRECTORS_B)
-    movies = deepcopy(MOVIES_B)
-    rankings = deepcopy(RANKINGS_B)
+    teams = deepcopy(TEAMS_B)
+    matches = deepcopy(MATCHES_B)
+    players = deepcopy(PLAYERS_B)
 
     results = {
-        1: delete_all_directors(),
-        2: post_director(directors[0]),
-        3: post_director(directors[1]),
-        4: post_director(directors[2]),
-        5: get_all_directors(directors),
-        6: post_movie(directors[0], movies[0]),
-        7: post_movie(directors[0], movies[1]),
-        8: post_movie(directors[1], movies[2]),
-        9: post_movie(directors[1], movies[3]),
-        10: post_movie(directors[2], movies[4]),
-        11: post_movie(directors[2], movies[5]),
-        12: get_director_movies(directors[0]),
-        13: get_director_movies(directors[1]),
-        14: get_director_movies(directors[2]),
-        15: post_ranking(directors[0], rankings[0]),
-        16: post_ranking(directors[0], rankings[1]),
-        17: post_ranking(directors[0], rankings[2]),
-        18: post_ranking(directors[1], rankings[3]),
-        19: post_ranking(directors[1], rankings[4]),
-        20: post_ranking(directors[1], rankings[5]),
-        21: post_ranking(directors[2], rankings[6]),
-        22: post_ranking(directors[2], rankings[7]),
-        23: post_ranking(directors[2], rankings[8]),
-        24: get_director_rankings(directors[0]),
-        25: get_director_rankings(directors[1]),
-        26: get_ranking_from_movie(movies[0]),
-        27: get_ranking_from_movie(movies[4]),
-        28: delete_worst_director(directors, rankings, movies),
-        29: delete_worst_director(directors, rankings, movies),
-        30: delete_worst_director(directors, rankings, movies),
-        31: get_all_directors(directors),
+        1: delete_all_teams(),
+        2: post_team(teams[0]),
+        3: post_team(teams[1]),
+        4: post_team(teams[2]),
+        5: post_team(teams[3]),
+        6: post_team(teams[4]),
+        7: get_all_teams(teams),
+        8: post_match(teams[1], teams[0], matches[2]),
+        9: post_match(teams[1], teams[4], matches[3]),
+        10: post_match(teams[2], teams[3], matches[4]),
+        11: post_match(teams[2], teams[1], matches[5]),
+        12: get_team_matches(teams[0]),
+        13: get_team_matches(teams[1]),
+        14: get_team_matches(teams[2]),
+        15: post_player(teams[0], players[0]),
+        16: post_player(teams[0], players[1]),
+        17: post_player(teams[0], players[2]),
+        18: post_player(teams[1], players[3]),
+        19: post_player(teams[1], players[4]),
+        20: post_player(teams[1], players[5]),
+        21: post_player(teams[2], players[6]),
+        22: post_player(teams[2], players[7]),
+        23: post_player(teams[2], players[8]),
+        24: get_team_players(teams[0]),
+        25: get_team_players(teams[1]),
+        26: get_player_from_team(teams[0]),
+        27: get_player_from_team(teams[4]),
+        28: delete_worst_team(teams, players, matches),
+        29: delete_worst_team(teams, players, matches),
+        30: delete_worst_team(teams, players, matches),
+        31: get_all_teams(teams),
     }
 
     return results
