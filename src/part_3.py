@@ -32,8 +32,8 @@ def post_player(team, player, *, show=False):
 
 
 @__skip_exception
-def get_team_players(team, *, show=False):
-    url = f'{BASE_URL}/ranking/{team.id}'
+def get_team_player(team, *, show=False):
+    url = f'{BASE_URL}/player/{team.id}'
     response = get(url)
     body = response.json()
 
@@ -119,7 +119,7 @@ def get_player_top_assists(player, quantity, *, show=False):
 
 #esto lo podriamos hacer con matches pero tendriamos que especificar si es el team A o B
 @__skip_exception
-def get_player_from_team(team, *, show=False): 
+def get_players_from_team(team, *, show=False): 
     url = f'{BASE_URL}/teams/{team.id}/players'
     response = get(url)
     body = response.json()
