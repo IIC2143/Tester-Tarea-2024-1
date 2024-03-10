@@ -97,7 +97,7 @@ def get_player_top_cards(player, quantity, *, show=False):
 
 @__skip_exception
 def get_player_top_assists(player, quantity, *, show=False):
-    url = f'{BASE_URL}/player/topGoals/{quantity}'
+    url = f'{BASE_URL}/player/topAssists/{quantity}'
     response = get(url)
     body = response.json()
 
