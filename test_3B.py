@@ -17,11 +17,11 @@ from src.part_2 import (
 
 from src.part_3 import (
     post_player,
-    get_team_players,
+    get_team_player,
     get_player_top_goals,
     get_player_top_assists,
     get_player_top_cards,
-    get_player_from_team,
+    get_players_from_team,
     delete_worst_team,
 )
 
@@ -57,10 +57,10 @@ def test_3B():
         21: post_player(teams[2], players[6]),
         22: post_player(teams[2], players[7]),
         23: post_player(teams[2], players[8]),
-        24: get_team_players(teams[0]),
-        25: get_team_players(teams[1]),
-        26: get_player_from_team(teams[0]),
-        27: get_player_from_team(teams[4]),
+        24: get_team_player(teams[0]),
+        25: get_team_player(teams[1]),
+        26: get_players_from_team(teams[0]),
+        27: get_players_from_team(teams[4]),
         28: delete_worst_team(teams, players, matches),
         29: delete_worst_team(teams, players, matches),
         30: delete_worst_team(teams, players, matches),
