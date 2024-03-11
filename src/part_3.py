@@ -32,18 +32,18 @@ def post_player(team, player, *, show=False):
 
 
 @__skip_exception
-def get_team_player(team, *, show=False):
-    url = f'{BASE_URL}/player/{team.id}'
+def get_team_player(player, *, show=False):
+    url = f'{BASE_URL}/players/{player.id}/team'
     response = get(url)
     body = response.json()
 
     if show:
-        __show(body, team.players)
+        __show(body, player.team)
 
-    if len(body) == len(team.players):
+    if len(body) == len(player.team):
         content_match = all(
-            player.is_valid(body[i])
-            for i, player in enumerate(team.players)
+            team.is_valid(body[i])
+            for i, team in enumerate(player.team)
         )
 
         return content_match
@@ -53,7 +53,7 @@ def get_team_player(team, *, show=False):
 
 @__skip_exception
 def get_player_top_goals(player, quantity, *, show=False):
-    url = f'{BASE_URL}/player/topGoals/{quantity}'
+    url = f'{BASE_URL}/players/topGoals/{quantity}'
     response = get(url)
     body = response.json()
 
@@ -75,13 +75,13 @@ def get_player_top_goals(player, quantity, *, show=False):
 
 @__skip_exception
 def get_player_top_cards(player, quantity, *, show=False):
-    url = f'{BASE_URL}/player/topCards/{quantity}'
+    url = f'{BASE_URL}/players/topCards/{quantity}'
     response = get(url)
     body = response.json()
 
     players_copy = deepcopy(player)
 
-    sorted_player = sorted(players_copy, key=lambda player: player.card, reverse=True)
+    sorted_player = sorted(players_copy, key=lambda player: player.card, reverse=False)
     selected = sorted_player[:quantity]
 
     if show:
@@ -97,13 +97,13 @@ def get_player_top_cards(player, quantity, *, show=False):
 
 @__skip_exception
 def get_player_top_assists(player, quantity, *, show=False):
-    url = f'{BASE_URL}/player/topAssists/{quantity}'
+    url = f'{BASE_URL}/players/topAssists/{quantity}'
     response = get(url)
     body = response.json()
 
     players_copy = deepcopy(player)
 
-    sorted_player = sorted(players_copy, key=lambda player: player.assist, reverse=True)
+    sorted_player = sorted(players_copy, key=lambda player: player.assist/(player.goal+player.assist), reverse=True)
     selected = sorted_player[:quantity]
 
     if show:
