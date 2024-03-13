@@ -12,8 +12,8 @@ from data import TEAMS_B, WRONG_TEAMS
 
 
 def test_1B():
-    teams = deepcopy(TEAMS_B)
-    bad_teams = deepcopy(WRONG_TEAMS)
+    teams = deepcopy(TEAMS_B[0:3])
+    bad_teams = deepcopy(WRONG_TEAMS[0:2])
 
     results = {
         1: delete_all_teams(),

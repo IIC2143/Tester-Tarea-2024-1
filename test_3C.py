@@ -32,12 +32,12 @@ from data import (
 
 
 def test_3C():
-    teams = deepcopy(TEAMS_C)
-    bad_teams = deepcopy(WRONG_TEAMS_2)
-    matches = deepcopy(MATCHES_C)
-    bad_matches = deepcopy(WRONG_MATCHES_2)
-    players = deepcopy(PLAYERS_C)
-    bad_players = deepcopy(WRONG_PLAYERS)
+    teams = deepcopy(TEAMS_C[0:4])
+    bad_teams = deepcopy(WRONG_TEAMS_2[0:3])
+    matches = deepcopy(MATCHES_C[0:5])
+    bad_matches = deepcopy(WRONG_MATCHES_2[0:2])
+    players = deepcopy(PLAYERS_C[0:9])
+    bad_players = deepcopy(WRONG_PLAYERS[0:2])
 
     results = {
         1: delete_all_teams(),

@@ -14,7 +14,7 @@ class Team:
 
     def data(self):
         return {
-            'Team': {
+            'team': {
                 'name': self.name,
                 'stadium': self.stadium,
                 'capacity': self.capacity,

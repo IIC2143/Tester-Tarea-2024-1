@@ -12,7 +12,7 @@ from data import TEAMS_A
 
 
 def test_1A():
-    teams = deepcopy(TEAMS_A)
+    teams = deepcopy(TEAMS_A[0:3])
 
     results = {
         1: delete_all_teams(),

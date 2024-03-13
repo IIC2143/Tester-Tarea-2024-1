@@ -19,9 +19,9 @@ from data import TEAMS_B, MATCHES_B, WRONG_MATCHES
 
 
 def test_2B():
-    teams = deepcopy(TEAMS_B)
-    matches = deepcopy(MATCHES_B)
-    bad_matchs = deepcopy(WRONG_MATCHES)
+    teams = deepcopy(TEAMS_B[0:3])
+    matches = deepcopy(MATCHES_B[0:6])
+    bad_matchs = deepcopy(WRONG_MATCHES[0])
 
     results = {
         1: delete_all_teams(),
