@@ -86,7 +86,7 @@ def get_matches_by_team(matches, team, *, show=False):
     filtered_matches = [
         match
         for match in matches
-        if team in match.teamA.name or team in match.teamB.name
+        if team.id == match.teamA.id or team.id == match.teamB.id
     ]
 
     if show:
