@@ -19,7 +19,7 @@ from data import TEAMS_A, MATCHES_A
 
 
 def test_2A():
-    teams = deepcopy(TEAMS_A[0:3])
+    teams = deepcopy(TEAMS_A[0:4])
     matches = deepcopy(MATCHES_A[0:6])
 
     results = {

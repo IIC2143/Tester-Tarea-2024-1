@@ -29,7 +29,7 @@ from data import TEAMS_A, MATCHES_A, PLAYERS_A
 
 
 def test_3A():
-    teams = deepcopy(TEAMS_A[0:3])
+    teams = deepcopy(TEAMS_A[0:4])
     matches = deepcopy(MATCHES_A[0:6])
     players = deepcopy(PLAYERS_A[0:9])
 

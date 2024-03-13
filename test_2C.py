@@ -21,8 +21,8 @@ from data import TEAMS_C, MATCHES_C, WRONG_MATCHES_2, WRONG_TEAMS_2
 def test_2C():
     teams = deepcopy(TEAMS_C[0:7])
     bad_teams = deepcopy(WRONG_TEAMS_2[0:4])
-    matches = deepcopy(MATCHES_C[0:4])
-    bad_matches = deepcopy(WRONG_MATCHES_2[0])
+    matches = deepcopy(MATCHES_C[0:6])
+    bad_matches = deepcopy(WRONG_MATCHES_2)
 
     results = {
         1: delete_all_teams(),

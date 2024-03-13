@@ -21,7 +21,7 @@ from data import TEAMS_B, MATCHES_B, WRONG_MATCHES
 def test_2B():
     teams = deepcopy(TEAMS_B[0:3])
     matches = deepcopy(MATCHES_B[0:6])
-    bad_matchs = deepcopy(WRONG_MATCHES[0])
+    bad_matchs = deepcopy(WRONG_MATCHES)
 
     results = {
         1: delete_all_teams(),
@@ -42,8 +42,8 @@ def test_2B():
         16: get_matches_by_team(matches, 'Universidad Católica'),
         17: delete_team(teams, teams[0]),
         18: not post_match(teams[1], teams[0], bad_matchs[0]),
-        19: patch_match(matches[4], {'match': {'teamA': teams[2]}}),
-        20: not patch_match(matches[0], {'match': {'teamB': teams[2]}}),
+        19: patch_match(matches[4], {'match': {'teamA': teams[1]}}),
+        20: not patch_match(matches[0], {'match': {'teamB': teams[1]}}),
     }
 
     return results
