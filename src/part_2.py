@@ -29,9 +29,13 @@ def get_team_matches(team, *, show=False):
 @__skip_exception
 def post_match(teamA, teamB, match, *, show=False):
     url = f'{BASE_URL}/matches'
+    match.teamA = teamA.id
+    match.teamB = teamB.id
     data = match.data()
     response = post(url, json=data)
     body = response.json()
+
+
 
     if show:
         __show(body, match)
@@ -79,7 +83,7 @@ def patch_match(match, new_match_data, *, show=False):
 
 @__skip_exception
 def get_matches_by_team(matches, team, *, show=False):
-    url = f'{BASE_URL}/matches/{team}'
+    url = f'{BASE_URL}/matches/{team.id}'
     response = get(url)
     body = response.json()
 

@@ -74,6 +74,8 @@ class Match:
             'match': {
                 'state': self.state,
                 'result': self.result,
+                'teamA': self.teamA,
+                'teamB': self.teamB,
             },
         }
 
