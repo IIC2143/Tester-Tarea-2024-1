@@ -38,7 +38,7 @@ def test_2A():
         13: get_team_matches(teams[0]),
         14: get_team_matches(teams[1]),
         15: get_team_matches(teams[2]),
-        16: patch_match(matches[0], {'match': {'teamA': teams[2]}}),
+        16: patch_match(matches[0], {'match': {'state': True, 'result': "3-0"}}),
         17: get_team(teams[0]),
     }
 

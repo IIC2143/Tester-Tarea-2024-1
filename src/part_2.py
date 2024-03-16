@@ -35,13 +35,12 @@ def post_match(teamA, teamB, match, *, show=False):
     response = post(url, json=data)
     body = response.json()
 
-
-
     if show:
         __show(body, match)
 
     if response.status_code >= 400:
         return False
+    
 
     if match.is_valid(body, is_new=True):
         teamA.matches.append(match)
@@ -60,7 +59,8 @@ def post_match(teamA, teamB, match, *, show=False):
 @__skip_exception
 def patch_match(match, new_match_data, *, show=False):
     url = f'{BASE_URL}/matches/{match.id}'
-    data = new_match_data.data()
+    data = new_match_data
+
     response = patch(url, json=data)
     body = response.json()
 
@@ -83,7 +83,8 @@ def patch_match(match, new_match_data, *, show=False):
 
 @__skip_exception
 def get_matches_by_team(matches, team, *, show=False):
-    url = f'{BASE_URL}/matches/{team.id}'
+    url = f'{BASE_URL}/matches/{team.name}'
+    
     response = get(url)
     body = response.json()
 
@@ -93,9 +94,9 @@ def get_matches_by_team(matches, team, *, show=False):
         if team.id == match.teamA or team.id == match.teamB
     ]
 
+
     if show:
         __show(body, filtered_matches)
-
     if len(body) == len(filtered_matches):
         content_match = all(
             match.is_valid(body[i])

@@ -57,7 +57,7 @@ def test_3C():
         15: post_match(teams[1], teams[3], matches[4]),
         16: post_match(teams[1], teams[2], matches[2]),
         17: post_match(teams[2], teams[3], matches[3]),
-        18: patch_match(matches[3], {'match': {'teamA': teams[1]}}),
+        18: patch_match(matches[3], {'match': {'state': False, 'result': "---"}}),
         19: get_team_matches(teams[0]),
         20: get_team_matches(teams[1]),
         21: get_team_matches(teams[2]),

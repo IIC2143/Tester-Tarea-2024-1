@@ -38,12 +38,12 @@ def test_2B():
         12: get_team_matches(teams[0]),
         13: get_team_matches(teams[1]),
         14: get_team_matches(teams[2]),
-        15: get_matches_by_team(matches, 'Universidad de Chile'),
-        16: get_matches_by_team(matches, 'Universidad Católica'),
+        15: get_matches_by_team(matches, teams[0]),
+        16: get_matches_by_team(matches, teams[1]),
         17: delete_team(teams, teams[0]),
         18: not post_match(teams[1], teams[0], bad_matchs[0]),
-        19: patch_match(matches[4], {'match': {'teamA': teams[1]}}),
-        20: not patch_match(matches[0], {'match': {'teamB': teams[1]}}),
+        19: patch_match(matches[4], {'match': {'result': "4-0"}}),
+        20: not patch_match(matches[0], {'match': {'result': ""}}),
     }
 
     return results

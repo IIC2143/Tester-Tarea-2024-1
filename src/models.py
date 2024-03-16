@@ -81,9 +81,9 @@ class Match:
 
     def is_valid(self, data, is_new=False):
         attr_1 = data['id'] == self.id or is_new
-        attr_2 = data['teamA'] == self.teamA.id or is_new
-        attr_3 = data['teamB'] == self.teamB.id or is_new
-        attr_4 = data['stat'] == self.state
+        attr_2 = data['teamA'] == self.teamA or is_new
+        attr_3 = data['teamB'] == self.teamB or is_new
+        attr_4 = data['state'] == self.state
         attr_5 = data['result'] == self.result
 
         return all([attr_1, attr_2, attr_3, attr_4, attr_5])
