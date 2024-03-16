@@ -57,7 +57,7 @@ def test_3A():
         21: get_team_player(players[3]),
         22: get_team_player(players[6]),
         23: get_player_top_goals(players, 3),
-        24: get_player_top_assists(players, 1),
+        24: get_player_top_assists(players, 3),
         25: get_player_top_cards(players, 4),
     }
 

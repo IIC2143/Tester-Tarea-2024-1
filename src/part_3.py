@@ -80,6 +80,7 @@ def get_player_top_cards(player, quantity, *, show=False):
     players_copy = deepcopy(player)
 
     sorted_player = sorted(players_copy, key=lambda player: player.card, reverse=False)
+
     selected = sorted_player[:quantity]
 
     if show:
@@ -100,10 +101,9 @@ def get_player_top_assists(player, quantity, *, show=False):
     response = get(url)
     body = response.json()
 
-
     players_copy = deepcopy(player)
 
-    sorted_player = sorted(players_copy, key=lambda player: player.assist/(player.goal+player.assist), reverse=True)
+    sorted_player = sorted(players_copy, key=lambda player: player.assist/(player.assist+player.goal), reverse=True)
     selected = sorted_player[:quantity]
 
     if show:
@@ -150,7 +150,7 @@ def delete_worst_team(teams, matches, players, *, show=False): #B
     if show:
         __show(body, lowest_team)
         
-    print(lowest_team.is_valid(body))
+    #print(lowest_team.is_valid(body))
     if lowest_team.is_valid(body):
         for match in lowest_team.matches:
             # movie.destroy()

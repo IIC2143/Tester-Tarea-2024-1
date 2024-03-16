@@ -122,7 +122,7 @@ WRONG_MATCHES_2 = [
 PLAYERS_A = [
     Player('Cristian Ruz', 10, 4,0),
     Player('Arturo Vidal', 0, 3, 5),
-    Player('Felipe Loyola', 4, 1, 5),
+    Player('Felipe Loyola', 7, 1, 5),
     Player('Sebatian Saez', 2, 1, 0),
     Player('Ignacio Jeraldino',4,0,3),
     Player('Felipe Flores', 3, 2, 1),
@@ -145,19 +145,19 @@ PLAYERS_B = [
 
 PLAYERS_C = [
     Player('Gustavo Lanaro', 1, 0, 0),
-    Player('Diego Valencia', 0, 0, 0),
-    Player('Pablo Parra', 0, 0, 0),
-    Player('Matias Rodriguez', 0, 2, 0),
+    Player('Diego Valencia', 3, 8, 0),
+    Player('Pablo Parra', 1, 1, 0),
+    Player('Matias Rodriguez', 6, 2, 0),
     Player('Edson Puch', 2, 0, 2),
-    Player('Felipe Fritz', 0, 0, 0),
-    Player('Diego Sanchez', 0, 0, 0),
-    Player('Pablo Parra', 0, 3, 0),
-    Player('Ricardo Matamala', 1, 0, 1)
+    Player('Felipe Fritz', 2, 10, 0),
+    Player('Diego Sanchez', 4, 0, 0),
+    Player('Pablo Parra', 1, 3, 0),
+    Player('Ricardo Matamala', 1, 9, 1)
 ]
 
 WRONG_PLAYERS = [
     Player('', '', 0, 0),
-    Player(2,'Juan López',1,0)
+    Player(9,2,'',0)
     ]
 
 
