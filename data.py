@@ -156,8 +156,8 @@ PLAYERS_C = [
 ]
 
 WRONG_PLAYERS = [
-    Player('', 1, 0, 0),
-    Player(2,'Juan López',0,0)
+    Player('', '', 0, 0),
+    Player(2,'Juan López',1,0)
     ]
 
 

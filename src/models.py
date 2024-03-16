@@ -125,7 +125,6 @@ class Player:
         self.assist = assist
         self.card = card
         self.team = None
-        self.team_id = None
 
     def data(self):
         return {
@@ -143,10 +142,9 @@ class Player:
         attr_3 = float(data['goal']) == float(self.goal)
         attr_4 = float(data['assist']) == float(self.assist)
         attr_5 = float(data['card']) == float(self.card)
-        attr_6 = data['team'] == self.team
-        attr_7 = is_new or data['team_id'] == self.team.id
+        attr_6 = is_new or data['team_id'] == self.team.id
 
-        return all([attr_1, attr_2, attr_3, attr_4, attr_5, attr_6, attr_7])
+        return all([attr_1, attr_2, attr_3, attr_4, attr_5,  attr_6])
 
     def destroy(self):
         self.team.players.remove(self)

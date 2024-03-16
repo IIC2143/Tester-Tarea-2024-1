@@ -8,20 +8,21 @@ BASE_URL = 'http://localhost:3000'
 
 @__skip_exception
 def post_player(team, player, *, show=False):
-    url = f'{BASE_URL}/player/{team.id}'
+    url = f'{BASE_URL}/players/{team.id}'
     data = player.data()
     response = post(url, json=data)
     body = response.json()
 
     if show:
         __show(body, player)
+    
 
     if player.is_valid(body, is_new=True):
         team.players.append(player)
         player.id = body['id']
         player.name = body['name']
         player.goal = body['goal']
-        player.asist = body['asist']
+        player.asist = body['assist']
         player.card = body['card']
         player.team = team
         player.team_id = team.id
@@ -40,11 +41,9 @@ def get_team_player(player, *, show=False):
     if show:
         __show(body, player.team)
 
-    if len(body) == len(player.team):
-        content_match = all(
-            team.is_valid(body[i])
-            for i, team in enumerate(player.team)
-        )
+
+    if body['id'] == player.team.id:
+        content_match = player.team.is_valid(body)
 
         return content_match
 
@@ -78,7 +77,6 @@ def get_player_top_cards(player, quantity, *, show=False):
     url = f'{BASE_URL}/players/topCards/{quantity}'
     response = get(url)
     body = response.json()
-
     players_copy = deepcopy(player)
 
     sorted_player = sorted(players_copy, key=lambda player: player.card, reverse=False)
@@ -88,6 +86,7 @@ def get_player_top_cards(player, quantity, *, show=False):
         __show(body, selected)
 
     if len(selected) == len(body) == quantity:
+    
         return all(
             player.is_valid(body[i])
             for i, player in enumerate(selected)
@@ -100,6 +99,7 @@ def get_player_top_assists(player, quantity, *, show=False):
     url = f'{BASE_URL}/players/topAssists/{quantity}'
     response = get(url)
     body = response.json()
+
 
     players_copy = deepcopy(player)
 
@@ -145,11 +145,12 @@ def delete_worst_team(teams, matches, players, *, show=False): #B
     body = response.json()
 
     lowest_team = min(teams, key=lambda team: team.calculate_points())
-
+    
 
     if show:
         __show(body, lowest_team)
-
+        
+    print(lowest_team.is_valid(body))
     if lowest_team.is_valid(body):
         for match in lowest_team.matches:
             # movie.destroy()
