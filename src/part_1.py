@@ -12,6 +12,8 @@ def get_all_teams(teams: list[Team], *, show=False):
     response = get(url)
     body = response.json()
 
+    
+
     if show:
         __show(body, teams)
 

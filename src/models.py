@@ -42,7 +42,7 @@ class Team:
         return points
 
     def destroy(self):
-        for match in self.mathces:
+        for match in self.matches:
             match.destroy()
 
         for player in self.players:
