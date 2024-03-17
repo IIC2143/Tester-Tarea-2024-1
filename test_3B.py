@@ -61,9 +61,9 @@ def test_3B():
         25: get_team_player(players[3]),
         26: get_players_from_team(teams[0]),
         27: get_players_from_team(teams[4]),
-        28: delete_worst_team(teams, players, matches),
-        29: delete_worst_team(teams, players, matches),
-        30: delete_worst_team(teams, players, matches),
+        28: delete_worst_team(teams, matches, players),
+        29: delete_worst_team(teams, matches, players),
+        30: delete_worst_team(teams, matches, players),
         31: get_all_teams(teams),
     }
 

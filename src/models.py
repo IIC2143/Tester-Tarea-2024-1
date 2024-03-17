@@ -33,12 +33,17 @@ class Team:
     
     def calculate_points(self):
         points = 0
+
         for match in self.matches:
+
             if match.state:
-                if match.winner() == self:
+
+                if match.winner() == self.id:
                     points += 3
                 elif match.winner() == None:
                     points += 1
+        
+        
         return points
 
     def destroy(self):

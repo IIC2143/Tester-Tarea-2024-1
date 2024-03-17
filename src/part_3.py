@@ -145,7 +145,8 @@ def delete_worst_team(teams, matches, players, *, show=False): #B
     body = response.json()
 
 
-    lowest_team = min(teams, key=lambda team: team.calculate_points())
+    lowest_team = min(teams, key=lambda team: (team.calculate_points(), len(team.matches)))
+
 
     if show:
         __show(body, lowest_team)
@@ -153,8 +154,23 @@ def delete_worst_team(teams, matches, players, *, show=False): #B
     if lowest_team.is_valid(body):
 
         for match in lowest_team.matches:
-            # movie.destroy()
+            # delete the match in the  other team that is playing
+ 
+            if match.teamA == lowest_team.id:
+
+                for team in teams:
+                    if team.id == match.teamB:
+                        team.matches.remove(match)
+
+            if match.teamB == lowest_team.id:
+  
+                for team in teams:
+
+                    if team.id == match.teamA:
+                        team.matches.remove(match)
+
             matches.remove(match)
+
         for player in lowest_team.players:
             # ranking.destroy()
             players.remove(player)
