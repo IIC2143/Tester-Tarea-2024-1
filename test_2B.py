@@ -43,7 +43,7 @@ def test_2B():
         17: delete_team(teams, teams[0]),
         18: not post_match(teams[1], teams[0], bad_matchs[0]),
         19: patch_match(matches[4], {'match': {'result': "4-0"}}),
-        20: not patch_match(matches[0], {'match': {'result': ""}}),
+        20: not patch_match(matches[0], {'match': {'result': "--"}}),
     }
 
     return results
