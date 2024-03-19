@@ -145,7 +145,7 @@ def delete_worst_team(teams, matches, players, *, show=False): #B
     body = response.json()
 
 
-    lowest_team = min(teams, key=lambda team: (team.calculate_points(), len(team.matches)))
+    lowest_team = min(teams, key=lambda team: (team.calculate_points(), 1 - len(team.matches)))
 
 
     if show:
