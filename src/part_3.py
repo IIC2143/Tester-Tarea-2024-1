@@ -22,7 +22,7 @@ def post_player(team, player, *, show=False):
         player.id = body['id']
         player.name = body['name']
         player.goal = body['goal']
-        player.asist = body['assist']
+        player.assist = body['assist']
         player.card = body['card']
         player.team = team
         player.team_id = team.id
@@ -73,7 +73,7 @@ def get_player_top_goals(player, quantity, *, show=False):
     return False
 
 @__skip_exception
-def get_player_top_cards(player, quantity, *, show=False):
+def get_player_top_cards(player, quantity, *, show=True):
     url = f'{BASE_URL}/players/topCards/{quantity}'
     response = get(url)
     body = response.json()
